@@ -20,6 +20,9 @@ berikut adalah tampilan hasil yang diambil dari database
 
 ![GitHub Logo](/data/tampil2.jpg)
 
+data dari database yg diambil
 
+
+![GitHub Logo](/data/tampil3.jpg)
 
 terima kasih
