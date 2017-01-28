@@ -11,7 +11,8 @@ background-attachment:fixed;
 zoom:reset;
 color:white;
 font-family:tahoma,verdana,arial;
-
+background-repeat:no-repeat;
+background-size:cover;
 }
 html {
 
@@ -22,7 +23,7 @@ zoom:reset;
 #tabelku {
 
 
-text-align:center;
+ text-align:center;
 margin-left:auto;
 margin-right:auto;
 
@@ -30,22 +31,99 @@ margin-right:auto;
 #tabelku tr td{
 
 
-background-image:url(data/body2.jpg);
+//background-image:url(data/body2.jpg);
+background-color:rgba(0, 0, 0, 0.5);
 }
 
 
 body input {
 
-color:blue;
+color:white;
+background-color:rgba(0, 0, 0, 0.5);
+
+
+}
+body button {
+
+color:white;
+background-color:rgba(0, 0, 0, 0.5);
+
+
+}
+
+
+body input:hover {
+
+color:black;
+background-color:white;
+
+}
+body button:hover {
+
+color:black;
+background-color:white;
+
+}
+
+h1 {
+
+color:white;
+opacity:0.7;
+
+
+}
+h2 {
+
+color:white;
+opacity:0.7;
+
+
+}
+
+
+label {
+ cursor: pointer;
 
 
 
 }
 
 
+#foto {
+   opacity: 0;
+   position: absolute;
+   z-index: -1;
+
+}
+
+
+
 </style>
 </head>
+<script src="data/my_jquerry.js"></script>
+<script>
 
+
+
+
+function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah')
+                    .attr('src', e.target.result)
+                    .width(150)
+                    .height(200);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+
+
+</script>
 <body>
 
 <table border="0" width="100%">
@@ -58,13 +136,20 @@ color:blue;
 
 <td height="200" style="text-align:center;">
 <h1>Mengimputkan data ke tabel</h1>
-<form method="post" action="/isi_data" >
-masukkan Nim : <br>
-<input type="number" name="nim" required><br><br>
-masukkan Nama : <br>
-<input type="text" name="nama" required><br><br>
-masukkan Status : <br>
-<input type="text" name="status" required><br><br>
+<form method="post" action="/isi_data" enctype="multipart/form-data">
+Nim : <br>
+<input type="number" name="nim" placeholder="masukkan Nim" required><br><br>
+Nama : <br>
+<input type="text" name="nama" placeholder="masukkan Nama" required><br><br>
+Status : <br>
+<input type="text" name="status" placeholder="masukkan Status" required><br><br>
+foto :<br><br>
+<label for="foto">
+<img id="blah" src="data/default.jpg" width="140" height="180">
+</label>
+<br>
+<input type="file" name="foto" id="foto" accept="image/*" style="width:120px;" onchange="readURL(this);">
+<br>
 <br>
 <input type="submit" value="masukkan data">
 <br>
@@ -89,7 +174,9 @@ masukkan Nama : <br>
 masukkan Status : <br>
 <input type="text" name="status" required><br><br>
 <br>
-<input type="submit" value="masukkan data">
+<br>
+
+<button type="submit">Daftarkan</button>
 </form>
 </td><td width="30%"></td>
 
@@ -97,19 +184,60 @@ masukkan Status : <br>
 <tr><td width="30%"></td><td style='text-align:center'>
 
 <h1>Menampilkan hasil</h1>
-<table id="tabelku" width='700' border='1'>
+<table id="tabelku" width='1000' border='1'>
 <tr>
-<td><h2>No.</h2></td><td><h2>Nim</h2></td><td><h2>Nama</h2></td><td><h2>Status</h2></td><td></td>
+<td><h2>No.</h2></td><td><h2>Nim</h2></td><td><h2>Nama</h2></td><td><h2>Status</h2></td><td><h2>Foto</h2></td><td><h2>Ubah</h2></td>
 </tr>
-<form method="post" action="/hapus">
+
 
 {{range .}}
 <tr>
-<td height='40'>{{.Number}}</td><td>{{.Id}}</td><td>{{.Name}}</td><td>{{.Text}}</td><td><button value='{{.Id}}' name="hapus">Hapus</button></td>
+<td height='40'><p>{{.Number}}</p></td><td><p>{{.Id}}</p></td><td><p>{{.Name}}</p></td><td><p>{{.Text}}</p></td>
+<td><a href="data/profil/{{.Id}}/{{.Profile}}" target="_blank"><img src="data/profil/{{.Id}}/{{.Profile}}" height="150" width="120"></a></td>
+<td><form method="post" action="/hapus">
+<button value='{{.Id}}' name="hapus">Hapus</button> <button id="button{{.Number}}" type="button">Edit Data</button></td></tr>
+<script>
+
+$(document).ready(function(){
+$('#button{{.Number}}').click(function(){
+$('#edit{{.Number}}').toggle();});});
+
+</script>
+
+<tr id="edit{{.Number}}" style="display:none;position:relative">
+</form>
+<td colspan="2"><h3>Mengedit Data 
+<br>Nomor : {{.Number}}<br>Dengan nim : <br>{{.Id}}</h3></td><td colspan="3" height="60">
+<br>
+<form method="post">
+
+Nama baru : 
+<input type="text" name="nama" value="{{.Name}}"><br><br>
+Status baru : 
+<input type="text" name="status" value="{{.Text}}"><br><br>
+
+<button type="submit" name="id" value="{{.Id}}" formaction="/ubah">Simpan</button> <input type="reset" value="Batal">
+<br><br>
+</form>
+</td><td>
+<form method="post" action="/ubah_foto" enctype="multipart/form-data">
+<br>Foto<br>
+
+
+<img src="data/profil/{{.Id}}/{{.Profile}}"  height="200" width="140">
+
+<br>Pilih Foto baru<br>
+<br>
+<input type="file" name="foto" accept="image/*" required style="width:140px;" onchange="readURL1(this);"><br><br>
+<button type="submit" name="id" value="{{.Id}}">Simpan</button>
+<br>
+</form>
+</td>
 </tr>
+
 {{end}}
 
-</form>
+
 </table>
 <p>tanpa melakukan looping seluruh html</p>
 
