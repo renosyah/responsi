@@ -37,7 +37,7 @@ CREATE TABLE `mhs` (
 
 LOCK TABLES `mhs` WRITE;
 /*!40000 ALTER TABLE `mhs` DISABLE KEYS */;
-INSERT INTO `mhs` VALUES (153210001,'Reno Syahputra','mahasiswa','261b6dd69f8d5f88a996fd6d7159e3c3.gif'),(153210002,'isnaini','bukan mahasiswa','759b2f4f2de780d5b16353c91fc79b6be2684e87_hq.gif'),(153210003,'Idul zulan','mahasiswa','gandalf_to_the_music.gif'),(153210004,'Derek Imbiri','mahasiswa','troll-face-itchy-ass-dance-scratch-bum-trollface.gif'),(153210005,'Eko bambang','mahasiswa','anime-dancing-girl-3.gif'),(153210006,'Sony Cassini','mahasiswa','tumblr_n2jgzxjXxT1tod5n6o1_400.gif'),(153210007,'Ami','mahasiswa','QbLg_f-maxage-0.gif'),(153210009,'Ahmad deniza Tirtana','mahasiswa','Man-Dancing-Funny-Gif.gif'),(163210003,'M.Rifkial','mahasiswa','132763956817.gif');
+INSERT INTO `mhs` VALUES (153210001,'Reno Syahputra','mahasiswa','261b6dd69f8d5f88a996fd6d7159e3c3.gif'),(153210002,'isnaini','bukan mahasiswa','759b2f4f2de780d5b16353c91fc79b6be2684e87_hq.gif'),(153210003,'Idul zulan','mahasiswa','gandalf_to_the_music.gif'),(153210004,'Derek Imbiri','mahasiswa','troll-face-itchy-ass-dance-scratch-bum-trollface.gif'),(153210005,'Eko bambang','mahasiswa','raw.gif'),(153210006,'Sony Cassini','mahasiswa','tumblr_n2jgzxjXxT1tod5n6o1_400.gif'),(153210007,'Ami','mahasiswa','QbLg_f-maxage-0.gif'),(153210009,'Ahmad deniza Tirtana','mahasiswa','Man-Dancing-Funny-Gif.gif'),(163210003,'M.Rifkial','mahasiswa','132763956817.gif');
 /*!40000 ALTER TABLE `mhs` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-28 19:27:35
+-- Dump completed on 2017-02-13 20:34:08
